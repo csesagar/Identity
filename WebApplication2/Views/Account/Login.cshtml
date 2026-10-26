@@ -1,0 +1,56 @@
+﻿@model WebApplication2.Models.LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+    var returnUrl = @Context.Request.Query["ReturnUrl"];
+}
+
+
+<h4>LoginModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Login" asp-route-returnUrl="@returnUrl">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="RememberMe" class="control-label"></label>
+                <input asp-for="RememberMe" class="form-check-input" />
+                <span asp-validation-for="RememberMe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+                New user? < <a asp-action="Register">click</a> to register? <br />
+               Forgot Password <a asp-action="ForgotPassword">Click</a> to reset
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+<h3>Google or Facebook</h3>
+<hr/>
+        <form asp-action="ExternalLogin" asp-route-returnUrl="@returnUrl">
+	
+            <input type="submit"name="Provider"value="Google"class="btn btn-primary"/>
+            <input type="submit"name="Provider"value="Facebook"class="btn btn-primary"/>
+</form>
+</div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
